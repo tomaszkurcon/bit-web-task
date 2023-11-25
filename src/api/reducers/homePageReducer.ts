@@ -1,11 +1,11 @@
 import { Reducer } from "react";
-import { Languages } from "../enums/Languages";
+import { Languages } from "../../enums/Languages";
 
 type TAction = {
   type: string;
   payload: THomePageState;
 };
-export type THomePageState = {
+type THomePageState = {
   year: string;
   language?: Languages;
   yearsList: string[];

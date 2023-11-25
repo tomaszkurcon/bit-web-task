@@ -1,6 +1,5 @@
 export enum Languages {
-    EN = 'en',
-    NO = 'no',
-    SE = 'se',
-  }
-  
+  EN = "en",
+  NO = "no",
+  SE = "se",
+}

@@ -7,7 +7,7 @@ import { Languages } from "../enums/Languages";
 import { TNobelPrize } from "../types";
 
 import Flag from "../components/common/Flag";
-import { homePageReducer } from "../api/reducers";
+import { homePageReducer } from "../api/reducers/homePageReducer";
 
 const HomePage = () => {
   const [state, dispatch] = useReducer(homePageReducer, {
@@ -16,6 +16,7 @@ const HomePage = () => {
     language: Languages.EN,
   });
   const prizes = useRouteLoaderData("root") as TNobelPrize[];
+
   useEffect(() => {
     const yearsList = generateYearsRange(prizes);
     dispatch({
@@ -30,6 +31,7 @@ const HomePage = () => {
       payload: { ...state, year: event.target.value },
     });
   };
+
   const selectLanguageHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -38,7 +40,9 @@ const HomePage = () => {
       payload: { ...state, language: event.target.value as Languages },
     });
   };
+
   const { year, yearsList, language } = state;
+  
   return (
     <Stack alignItems={"center"}>
       <Typography variant="h1">Hi!</Typography>

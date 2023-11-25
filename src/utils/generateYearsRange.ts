@@ -1,6 +1,5 @@
 import { TNobelPrize } from "../types";
 
-
 export const generateYearsRange = (prizes: TNobelPrize[]): string[] => {
   let maxYear = Number(prizes[0]?.awardYear);
   let minYear = Number(prizes[0]?.awardYear);

@@ -7,7 +7,7 @@ type TLink = {
   types: string;
 };
 export type TLanguages = {
-  [key in Languages]:string;
+  [key in Languages]: string;
 };
 type TLaureate = {
   fullName: TLanguages;
@@ -15,8 +15,8 @@ type TLaureate = {
   knownName: TLanguages;
   links: TLink[];
   motivation: TLanguages;
-  portion:string,
-  sortOrder:string
+  portion: string;
+  sortOrder: string;
 };
 export type TNobelPrize = {
   awardYear: string;
@@ -27,4 +27,11 @@ export type TNobelPrize = {
   links: TLink[];
   prizeAmount: number;
   prizeAmountAdjusted: number;
+};
+
+export type TPrizesTableData = {
+  awardYear: string;
+  category: string;
+  dateAwarded: string;
+  prizeAmount: number;
 };
