@@ -21,9 +21,9 @@ const HomePage = () => {
     const yearsList = generateYearsRange(prizes);
     dispatch({
       type: "SET-YEARS-RANGE",
-      payload: { ...state, yearsList: yearsList },
+      payload: { year: "", yearsList: yearsList, language: Languages.EN },
     });
-  }, [prizes, dispatch, state]);
+  }, [prizes, dispatch]);
 
   const selectYearHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
@@ -42,14 +42,18 @@ const HomePage = () => {
   };
 
   const { year, yearsList, language } = state;
-  
+
   return (
     <Stack alignItems={"center"}>
       <Typography variant="h1">Hi!</Typography>
-      <Typography>
+      <Typography textAlign="center">
         This site enables you to check all the Nobel's prizes for selected year
       </Typography>
-      <Stack flexDirection={"row"} gap={4}>
+      <Stack
+        flexDirection={{ xs: "column", sm: "row" }}
+        gap={{ xs: 0, sm: 4 }}
+        mb={{ xs: 4, sm: 0 }}
+      >
         <CustomSelect label="Year" onChange={selectYearHandler} value={year}>
           {yearsList.map((year, index) => (
             <MenuItem key={`${index}+${year}`} value={year}>

@@ -5,6 +5,7 @@ import { Languages } from "../enums/Languages";
 import { TNobelPrize, TPrizesTableData } from "../types";
 
 import PrizesTable from "../components/PrizesTable";
+import HomeButton from "../components/common/HomeButton";
 
 const Prizes = () => {
   const [prizesData, setPrizesData] = useState<TPrizesTableData[]>([]);
@@ -19,14 +20,19 @@ const Prizes = () => {
         return {
           awardYear: prize.awardYear,
           category: prize.category[currentLanguage],
-          dateAwarded: prize.dateAwarded,
+          dateAwarded: prize?.dateAwarded,
           prizeAmount: prize.prizeAmount,
         };
       });
     setPrizesData([...tableData]);
   }, [prizes, currentLanguage, year]);
 
-  return <PrizesTable currentLanguage={currentLanguage} data={prizesData} />;
+  return (
+    <>
+      <PrizesTable currentLanguage={currentLanguage} data={prizesData} />
+      <HomeButton />
+    </>
+  );
 };
 
 export default Prizes;

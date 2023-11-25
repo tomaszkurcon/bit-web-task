@@ -22,7 +22,7 @@ export type TNobelPrize = {
   awardYear: string;
   category: TLanguages;
   categoryFullName: TLanguages;
-  dateAwarded: string;
+  dateAwarded?: string;
   laureates: TLaureate[];
   links: TLink[];
   prizeAmount: number;
@@ -32,6 +32,6 @@ export type TNobelPrize = {
 export type TPrizesTableData = {
   awardYear: string;
   category: string;
-  dateAwarded: string;
+  dateAwarded?: string;
   prizeAmount: number;
 };

@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import dayjs from "dayjs";
 
-import { TableSortLabel } from "@mui/material";
+import { TableSortLabel, Typography } from "@mui/material";
 import { Languages } from "../enums/Languages";
 import { TPrizesTableData } from "../types";
 import { Orders } from "../enums/Orders";
@@ -78,7 +78,15 @@ export const PrizesTable = ({ currentLanguage, data }: PrizesTableProps) => {
   };
   return (
     <>
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{ backgroundColor: "#FBFBFB" }}>
+        <Typography
+          variant="h2"
+          p={2}
+          fontSize={{ xs: 30, sm: 40 }}
+          fontWeight="bold"
+        >
+          Nobel Prizes
+        </Typography>
         <Table sx={{ minWidth: 650 }} aria-label="prize table">
           <TableHead>
             <TableRow>
@@ -87,7 +95,7 @@ export const PrizesTable = ({ currentLanguage, data }: PrizesTableProps) => {
                   {index !== 0 ? (
                     <TableSortLabel
                       active={header.name === orderBy}
-                      direction={order}
+                      direction={header.name === orderBy ? order : Orders.ASC}
                       onClick={() =>
                         onClickSortHandler(
                           header.name as keyof TPrizesTableData
@@ -110,24 +118,31 @@ export const PrizesTable = ({ currentLanguage, data }: PrizesTableProps) => {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
-            {tableData.map((prize, index) => (
-              <TableRow
-                key={index}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {prize.awardYear}
-                </TableCell>
-                <TableCell>{prize.category}</TableCell>
-                <TableCell>
-                  {dayjs(prize.dateAwarded).format("DD-MM-YYYY")}
-                </TableCell>
-                <TableCell>{prize.prizeAmount.toLocaleString()}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          {tableData.length !== 0 && (
+            <TableBody>
+              {tableData.map((prize, index) => (
+                <TableRow
+                  key={index}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {prize.awardYear}
+                  </TableCell>
+                  <TableCell>{prize.category}</TableCell>
+                  <TableCell>
+                    {prize?.dateAwarded ? dayjs(prize.dateAwarded).format("DD-MM-YYYY") : "-"}
+                  </TableCell>
+                  <TableCell>{prize.prizeAmount.toLocaleString()}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          )}
         </Table>
+        {tableData.length === 0 && (
+          <Typography fontSize={24} p={3}>
+            No results...
+          </Typography>
+        )}
       </TableContainer>
     </>
   );
