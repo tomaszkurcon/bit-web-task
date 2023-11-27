@@ -22,6 +22,8 @@ export const prizeTableReducer: Reducer<TPrizeTableState, TAction> = (
       return { ...state, orderBy: action.payload.orderBy };
     case "SET-TABLE-DATA":
       return { ...state, tableData: [...action.payload.tableData] };
+    case "SORT-TABLE":
+      return {order:action.payload.order, orderBy:action.payload.orderBy, tableData:[...action.payload.tableData]}  
     default:
       return state;
   }

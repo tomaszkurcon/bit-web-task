@@ -13,7 +13,7 @@ import { Languages } from "../enums/Languages";
 import { TPrizesTableData } from "../types";
 import { Orders } from "../enums/Orders";
 import { createCompareFunc } from "../utils/sortDataBy";
-import { prizeTableReducer } from "../api/reducers/prizeTableReducer";
+import { prizeTableReducer } from "../state/reducers/prizeTableReducer";
 
 type PrizesTableProps = {
   currentLanguage: Languages;
@@ -45,7 +45,7 @@ const tableHeaders = [
     se: "Prissumma",
   },
 ];
-export const PrizesTable = ({ currentLanguage, data }: PrizesTableProps) => {
+const PrizesTable = ({ currentLanguage, data }: PrizesTableProps) => {
   const [state, dispatch] = useReducer(prizeTableReducer, {
     tableData: data,
     order: Orders.ASC,
@@ -67,13 +67,12 @@ export const PrizesTable = ({ currentLanguage, data }: PrizesTableProps) => {
     );
 
     dispatch({
-      type: "SET-ORDER-BY",
-      payload: { ...state, orderBy: property },
-    });
-    dispatch({ type: "SET-ORDER", payload: { ...state, order: newOrder } });
-    dispatch({
-      type: "SET-TABLE-DATA",
-      payload: { ...state, tableData: [...sortedData] },
+      type: "SORT-TABLE",
+      payload: {
+        order: newOrder,
+        orderBy: property,
+        tableData: [...sortedData],
+      },
     });
   };
   return (
@@ -130,7 +129,9 @@ export const PrizesTable = ({ currentLanguage, data }: PrizesTableProps) => {
                   </TableCell>
                   <TableCell>{prize.category}</TableCell>
                   <TableCell>
-                    {prize?.dateAwarded ? dayjs(prize.dateAwarded).format("DD-MM-YYYY") : "-"}
+                    {prize?.dateAwarded
+                      ? dayjs(prize.dateAwarded).format("DD-MM-YYYY")
+                      : "-"}
                   </TableCell>
                   <TableCell>{prize.prizeAmount.toLocaleString()}</TableCell>
                 </TableRow>

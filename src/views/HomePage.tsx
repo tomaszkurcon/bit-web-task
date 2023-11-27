@@ -7,7 +7,7 @@ import { Languages } from "../enums/Languages";
 import { TNobelPrize } from "../types";
 
 import Flag from "../components/common/Flag";
-import { homePageReducer } from "../api/reducers/homePageReducer";
+import { homePageReducer } from "../state/reducers/homePageReducer";
 
 const HomePage = () => {
   const [state, dispatch] = useReducer(homePageReducer, {
