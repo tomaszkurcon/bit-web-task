@@ -1,5 +1,8 @@
-# bit-web-task
+# bit-web-task - Nobel Prize App
+## Zadanie rekrutacyjne do sekcji BITWeb KN BIT
+Zadanie polegało na stworzeniu aplikacji Nobel Prize App przy użyciu TypeScript, React, Material UI.
 
+Aplikacja wykorzystuje The Nobel Prize API. Użytkownik wybiera rok dla którego chce wyświetlić nagrody oraz język w którym mają zostać pokazane informacje, po czym aplikacja wyświetla mu tabelę z zwróconymi danymi.
 ## Instrukcja uruchomienia aplikacji
 
 1. Sklonuj repozytorium
